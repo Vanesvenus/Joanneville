@@ -1,0 +1,904 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JoanneVille — Hair Studio, Mellieħa</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #111010;
+    --white: #FAFAF8;
+    --cream: #F4F0E8;
+    --tan: #C8B49A;
+    --tan-light: #E8DECE;
+    --gold: #B8935A;
+    --gold-light: #D4AA72;
+    --muted: #7A7268;
+    --border: rgba(200,180,154,0.3);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--white);
+    color: var(--black);
+    font-size: 15px;
+    line-height: 1.6;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 50;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 6%;
+    height: 64px;
+    background: var(--white);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.25rem; font-weight: 400;
+    color: var(--black); text-decoration: none;
+    letter-spacing: 0.02em;
+  }
+
+  .nav-links {
+    display: flex; gap: 2rem; list-style: none; align-items: center;
+  }
+  .nav-links a {
+    font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--muted); text-decoration: none; font-weight: 500;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--black); }
+
+  .btn-book {
+    background: var(--black);
+    color: var(--white) !important;
+    padding: 0.55rem 1.4rem;
+    font-size: 0.75rem !important;
+    letter-spacing: 0.12em;
+  }
+  .btn-book:hover { background: var(--gold) !important; color: var(--white) !important; }
+
+  .hamburger {
+    display: none; background: none; border: none; cursor: pointer; padding: 4px;
+    flex-direction: column; gap: 5px;
+  }
+  .hamburger span { display: block; width: 22px; height: 1.5px; background: var(--black); }
+
+  /* ── HERO ── */
+  #home {
+    padding-top: 64px;
+    min-height: 90vh;
+    display: flex; align-items: center;
+    padding-left: 6%; padding-right: 6%;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .hero-inner {
+    max-width: 620px;
+  }
+
+  .hero-eyebrow {
+    font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--gold); font-weight: 500; margin-bottom: 1.5rem;
+  }
+
+  h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(3rem, 6vw, 5.5rem);
+    font-weight: 400; line-height: 1.0;
+    margin-bottom: 1.5rem;
+    color: var(--black);
+  }
+  h1 em { font-style: italic; color: var(--gold); }
+
+  .hero-sub {
+    font-size: 1rem; color: var(--muted); font-weight: 300;
+    max-width: 420px; margin-bottom: 2.5rem; line-height: 1.7;
+  }
+
+  .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
+
+  .btn {
+    display: inline-block; padding: 0.85rem 2rem;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase;
+    font-weight: 500; text-decoration: none; cursor: pointer; border: none;
+    transition: all 0.2s;
+  }
+  .btn-primary { background: var(--black); color: var(--white); }
+  .btn-primary:hover { background: var(--gold); }
+  .btn-secondary { background: transparent; color: var(--black); border: 1px solid var(--black); }
+  .btn-secondary:hover { background: var(--black); color: var(--white); }
+
+  .hero-hours {
+    margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
+    display: flex; gap: 3rem; flex-wrap: wrap;
+  }
+  .hour-item { }
+  .hour-label { font-size: 0.7rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.25rem; }
+  .hour-val { font-size: 0.9rem; font-weight: 500; color: var(--black); }
+
+  /* ── SECTIONS ── */
+  section { padding: 6rem 6%; border-bottom: 1px solid var(--border); }
+
+  .section-label {
+    font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--gold); font-weight: 500; margin-bottom: 1rem; display: block;
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.8rem, 3vw, 2.8rem);
+    font-weight: 400; color: var(--black);
+    margin-bottom: 1rem; line-height: 1.15;
+  }
+  .section-sub {
+    font-size: 0.92rem; color: var(--muted); font-weight: 300; max-width: 480px; line-height: 1.7;
+  }
+
+  /* ── SERVICES ── */
+  #services .services-header { margin-bottom: 3rem; }
+
+  .services-list { }
+  .service-row {
+    display: flex; justify-content: space-between; align-items: baseline;
+    padding: 1.4rem 0; border-bottom: 1px solid var(--border);
+  }
+  .service-row:first-child { border-top: 1px solid var(--border); }
+  .service-left { }
+  .service-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem; font-weight: 400; color: var(--black); margin-bottom: 0.2rem;
+  }
+  .service-desc { font-size: 0.82rem; color: var(--muted); font-weight: 300; }
+  .service-price {
+    font-size: 0.85rem; font-weight: 500; color: var(--gold);
+    white-space: nowrap; padding-left: 2rem;
+  }
+
+  /* ── ABOUT ── */
+  #about {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: center;
+  }
+  .about-text .section-sub { max-width: 100%; margin-top: 1.5rem; }
+  .about-details { margin-top: 2rem; }
+  .about-detail { display: flex; gap: 0.8rem; margin-bottom: 1rem; align-items: flex-start; }
+  .about-detail-icon { color: var(--gold); margin-top: 2px; flex-shrink: 0; }
+  .about-detail-text { font-size: 0.88rem; color: var(--muted); line-height: 1.5; }
+  .about-detail-text strong { color: var(--black); display: block; font-weight: 500; font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 0.1rem; }
+
+  .about-visual {
+    background: var(--cream);
+    aspect-ratio: 4/5;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Playfair Display', serif;
+    font-size: 5rem; color: var(--tan);
+    position: relative; overflow: hidden;
+  }
+  .about-visual::after {
+    content: 'J';
+    font-size: 18rem; color: var(--tan-light);
+    position: absolute; right: -2rem; bottom: -3rem;
+    font-family: 'Playfair Display', serif; font-style: italic;
+    line-height: 1;
+  }
+
+  /* ── BOOKING ── */
+  #booking { background: var(--cream); }
+  .booking-grid {
+    display: grid; grid-template-columns: 1fr 1.4fr; gap: 6rem; align-items: start;
+    margin-top: 3rem;
+  }
+
+  .booking-note {
+    font-size: 0.85rem; color: var(--muted); font-weight: 300; line-height: 1.7;
+    margin-top: 1rem;
+  }
+
+  .form-box {
+    background: var(--white);
+    padding: 2.5rem;
+    border: 1px solid var(--border);
+  }
+
+  .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .form-group { margin-bottom: 1rem; }
+  .form-group.full { grid-column: span 2; }
+
+  label {
+    display: block; font-size: 0.7rem; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--muted); font-weight: 500;
+    margin-bottom: 0.4rem;
+  }
+
+  input, select, textarea {
+    width: 100%; padding: 0.75rem 0.9rem;
+    border: 1px solid var(--border);
+    background: var(--white);
+    font-family: 'DM Sans', sans-serif; font-size: 0.9rem;
+    color: var(--black); outline: none;
+    transition: border-color 0.2s;
+    -webkit-appearance: none; border-radius: 0;
+  }
+  input:focus, select:focus, textarea:focus { border-color: var(--gold); }
+  textarea { resize: vertical; min-height: 80px; }
+
+  .select-wrap { position: relative; }
+  .select-wrap::after {
+    content: '▾'; position: absolute; right: 0.9rem; top: 50%;
+    transform: translateY(-50%); color: var(--muted); pointer-events: none; font-size: 0.8rem;
+  }
+
+  .form-submit {
+    width: 100%; margin-top: 0.5rem;
+    padding: 0.95rem; background: var(--black); color: var(--white);
+    font-family: 'DM Sans', sans-serif; font-size: 0.78rem;
+    letter-spacing: 0.14em; text-transform: uppercase; font-weight: 500;
+    border: none; cursor: pointer; transition: background 0.2s;
+  }
+  .form-submit:hover { background: var(--gold); }
+
+  .form-success {
+    display: none; text-align: center; padding: 2rem 1rem;
+    background: var(--cream); border: 1px solid var(--border);
+    font-size: 0.9rem; color: var(--muted); line-height: 1.7;
+  }
+  .form-success strong { display: block; font-family: 'Playfair Display', serif; font-size: 1.2rem; color: var(--black); margin-bottom: 0.5rem; }
+
+  /* ── CONTACT ── */
+  #contact {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: start;
+  }
+  .contact-map {
+    background: var(--cream); aspect-ratio: 1; display: flex;
+    align-items: center; justify-content: center;
+    border: 1px solid var(--border);
+    font-size: 0.8rem; color: var(--muted); text-align: center; padding: 2rem;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    padding: 2.5rem 6%;
+    display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;
+    border-top: 1px solid var(--border);
+  }
+  footer p { font-size: 0.8rem; color: var(--muted); }
+  .footer-admin-link {
+    font-size: 0.72rem; color: var(--border); text-decoration: none; letter-spacing: 0.08em;
+    transition: color 0.2s; cursor: pointer; background: none; border: none;
+  }
+  .footer-admin-link:hover { color: var(--muted); }
+
+  /* ── ADMIN ── */
+  .admin-overlay {
+    display: none; position: fixed; inset: 0; z-index: 200;
+    background: rgba(17,16,16,0.6); backdrop-filter: blur(4px);
+    align-items: center; justify-content: center;
+  }
+  .admin-overlay.open { display: flex; }
+
+  .admin-modal {
+    background: var(--white); width: 90%; max-width: 920px;
+    max-height: 90vh; overflow-y: auto;
+    border: 1px solid var(--border);
+  }
+
+  .admin-header {
+    padding: 1.8rem 2rem; border-bottom: 1px solid var(--border);
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .admin-title {
+    font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 400;
+  }
+  .admin-close {
+    background: none; border: none; font-size: 1.3rem; cursor: pointer; color: var(--muted);
+    line-height: 1;
+  }
+
+  .admin-login { padding: 2.5rem 2rem; }
+  .admin-login p { font-size: 0.88rem; color: var(--muted); margin-bottom: 1.5rem; }
+  .admin-login input {
+    width: 100%; max-width: 280px; margin-bottom: 1rem;
+  }
+  .admin-login-btn {
+    display: block; padding: 0.75rem 2rem; background: var(--black); color: var(--white);
+    font-family: 'DM Sans', sans-serif; font-size: 0.78rem; letter-spacing: 0.12em;
+    text-transform: uppercase; border: none; cursor: pointer; transition: background 0.2s;
+  }
+  .admin-login-btn:hover { background: var(--gold); }
+  .admin-error { font-size: 0.82rem; color: #c0392b; margin-top: 0.5rem; }
+
+  .admin-panel { display: none; padding: 2rem; }
+  .admin-panel.visible { display: block; }
+
+  .admin-stats {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-bottom: 2rem;
+  }
+  .stat-box {
+    background: var(--cream); padding: 1.2rem 1.5rem; border: 1px solid var(--border);
+  }
+  .stat-num { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 400; color: var(--black); }
+  .stat-label { font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-top: 0.2rem; }
+
+  .admin-toolbar {
+    display: flex; gap: 1rem; margin-bottom: 1.5rem; flex-wrap: wrap; align-items: center;
+  }
+  .admin-toolbar select {
+    width: auto; padding: 0.5rem 2rem 0.5rem 0.8rem;
+    font-size: 0.82rem;
+  }
+  .admin-toolbar input[type="date"] {
+    width: auto; padding: 0.5rem 0.8rem; font-size: 0.82rem;
+  }
+  .admin-clear-btn {
+    margin-left: auto; padding: 0.5rem 1rem; background: none; border: 1px solid #ddd;
+    font-size: 0.75rem; color: var(--muted); cursor: pointer; letter-spacing: 0.08em;
+    text-transform: uppercase; font-family: 'DM Sans', sans-serif;
+    transition: all 0.2s;
+  }
+  .admin-clear-btn:hover { background: #c0392b; border-color: #c0392b; color: white; }
+
+  .bookings-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+  .bookings-table th {
+    text-align: left; font-size: 0.68rem; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--muted); font-weight: 500; padding: 0.6rem 0.8rem;
+    border-bottom: 1px solid var(--border); background: var(--cream);
+  }
+  .bookings-table td {
+    padding: 0.9rem 0.8rem; border-bottom: 1px solid var(--border);
+    color: var(--black); vertical-align: top;
+  }
+  .bookings-table tr:hover td { background: #fafaf8; }
+  .badge {
+    display: inline-block; padding: 0.2rem 0.6rem; font-size: 0.68rem;
+    letter-spacing: 0.1em; text-transform: uppercase; font-weight: 500;
+  }
+  .badge-new { background: #EDF7ED; color: #2d6a2d; }
+  .badge-done { background: var(--tan-light); color: var(--gold); }
+  .mark-done-btn {
+    background: none; border: none; font-size: 0.72rem; color: var(--gold);
+    cursor: pointer; text-decoration: underline; font-family: 'DM Sans', sans-serif;
+    padding: 0;
+  }
+  .no-bookings {
+    text-align: center; padding: 3rem 2rem; color: var(--muted);
+    font-size: 0.88rem; font-style: italic;
+  }
+
+  /* ── MOBILE NAV ── */
+  .mobile-nav {
+    display: none; position: fixed; inset: 0; background: var(--white); z-index: 100;
+    flex-direction: column; align-items: center; justify-content: center; gap: 2.5rem;
+  }
+  .mobile-nav.open { display: flex; }
+  .mobile-nav a {
+    font-family: 'Playfair Display', serif; font-size: 1.8rem; font-weight: 400;
+    color: var(--black); text-decoration: none;
+  }
+  .mobile-nav-close {
+    position: absolute; top: 1.5rem; right: 1.5rem;
+    background: none; border: none; font-size: 1.4rem; cursor: pointer; color: var(--muted);
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 800px) {
+    .nav-links { display: none; }
+    .hamburger { display: flex; }
+    #about { grid-template-columns: 1fr; gap: 2rem; }
+    .about-visual { display: none; }
+    .booking-grid { grid-template-columns: 1fr; gap: 2rem; }
+    #contact { grid-template-columns: 1fr; gap: 2rem; }
+    .contact-map { display: none; }
+    .admin-stats { grid-template-columns: 1fr 1fr; }
+    .form-grid { grid-template-columns: 1fr; }
+    .form-group.full { grid-column: span 1; }
+  }
+  @media (max-width: 500px) {
+    section { padding: 4rem 5%; }
+    #home { padding-left: 5%; padding-right: 5%; }
+    nav { padding: 0 5%; }
+    footer { padding: 2rem 5%; }
+    .admin-stats { grid-template-columns: 1fr; }
+    .admin-modal { max-height: 95vh; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#home" class="logo">JoanneVille</a>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="#booking" class="btn btn-book">Book Now</a></li>
+  </ul>
+  <button class="hamburger" onclick="openMobileNav()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- MOBILE NAV -->
+<nav class="mobile-nav" id="mobileNav">
+  <button class="mobile-nav-close" onclick="closeMobileNav()">✕</button>
+  <a href="#services" onclick="closeMobileNav()">Services</a>
+  <a href="#about" onclick="closeMobileNav()">About</a>
+  <a href="#contact" onclick="closeMobileNav()">Contact</a>
+  <a href="#booking" onclick="closeMobileNav()" style="color:var(--gold)">Book Now</a>
+</nav>
+
+<!-- HERO -->
+<section id="home">
+  <div class="hero-inner">
+    <p class="hero-eyebrow">Hair Studio · Mellieħa, Malta</p>
+    <h1>Your hair,<br><em>beautifully</em><br>done.</h1>
+    <p class="hero-sub">A personal hair studio in the heart of Mellieħa. Joanne brings years of expertise and a careful eye to every cut, colour, and style.</p>
+    <div class="hero-actions">
+      <a href="#booking" class="btn btn-primary">Book an Appointment</a>
+      <a href="#services" class="btn btn-secondary">View Services</a>
+    </div>
+    <div class="hero-hours">
+      <div class="hour-item">
+        <div class="hour-label">Mon / Thu–Sat</div>
+        <div class="hour-val">08:00 – 19:00</div>
+      </div>
+      <div class="hour-item">
+        <div class="hour-label">Tue / Wed / Sun</div>
+        <div class="hour-val">Closed</div>
+      </div>
+      <div class="hour-item">
+        <div class="hour-label">Phone</div>
+        <div class="hour-val">+36 21 525 260</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="services-header">
+    <span class="section-label">What We Offer</span>
+    <h2 class="section-title">Services</h2>
+  </div>
+  <div class="services-list">
+    <div class="service-row">
+      <div class="service-left">
+        <div class="service-name">Hair Cut</div>
+        <div class="service-desc">Precision cut tailored to your face shape and lifestyle</div>
+      </div>
+      <div class="service-price">From €30</div>
+    </div>
+    <div class="service-row">
+      <div class="service-left">
+        <div class="service-name">Wash & Blow Dry</div>
+        <div class="service-desc">Full wash, condition, and professional blow dry</div>
+      </div>
+      <div class="service-price">From €25</div>
+    </div>
+    <div class="service-row">
+      <div class="service-left">
+        <div class="service-name">Hair Styling</div>
+        <div class="service-desc">Curls, waves, up-dos and occasion styling</div>
+      </div>
+      <div class="service-price">From €35</div>
+    </div>
+    <div class="service-row">
+      <div class="service-left">
+        <div class="service-name">Colour</div>
+        <div class="service-desc">Full colour, root touch-up, or creative colour work</div>
+      </div>
+      <div class="service-price">From €50</div>
+    </div>
+    <div class="service-row">
+      <div class="service-left">
+        <div class="service-name">Highlights</div>
+        <div class="service-desc">Balayage, foils, or partial highlights</div>
+      </div>
+      <div class="service-price">From €65</div>
+    </div>
+    <div class="service-row">
+      <div class="service-left">
+        <div class="service-name">Treatment</div>
+        <div class="service-desc">Deep conditioning, keratin, or scalp treatment</div>
+      </div>
+      <div class="service-price">From €40</div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-text">
+    <span class="section-label">About</span>
+    <h2 class="section-title">Joanne's studio</h2>
+    <p class="section-sub">JoanneVille is a personal hair studio based in Mellieħa, Malta. Joanne works with each client individually — no rush, no assembly line. Just attentive, skilled work in a relaxed setting.</p>
+    <div class="about-details">
+      <div class="about-detail">
+        <svg class="about-detail-icon" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><circle cx="12" cy="11" r="3"/></svg>
+        <div class="about-detail-text">
+          <strong>Location</strong>
+          44 Triq il-Parrocca, Mellieħa, Malta
+        </div>
+      </div>
+      <div class="about-detail">
+        <svg class="about-detail-icon" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        <div class="about-detail-text">
+          <strong>Hours</strong>
+          Mon, Thu, Fri, Sat: 08:00 – 19:00 &nbsp;·&nbsp; Tue, Wed, Sun: Closed
+        </div>
+      </div>
+      <div class="about-detail">
+        <svg class="about-detail-icon" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 014.5 10.5a19.79 19.79 0 01-3.07-8.67A2 2 0 013.41 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L7.91 7.91a16 16 0 006.29 6.29l.76-.76a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+        <div class="about-detail-text">
+          <strong>Book by phone or online</strong>
+          +36 21 525 260
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="about-visual"></div>
+</section>
+
+<!-- BOOKING -->
+<section id="booking">
+  <span class="section-label">Appointments</span>
+  <h2 class="section-title">Book Online</h2>
+  <p class="section-sub">Fill in your details below and Joanne will confirm your appointment. No payment required.</p>
+
+  <div class="booking-grid">
+    <div>
+      <p style="font-size:0.88rem;color:var(--muted);line-height:1.8;margin-top:1.5rem;">
+        Bookings are confirmed within a few hours. If you need to reach Joanne directly, call <strong style="color:var(--black)">+36 21 525 260</strong>.
+      </p>
+      <p style="margin-top:1.5rem;font-size:0.82rem;color:var(--tan);line-height:1.7;">
+        Please give at least 24 hours notice if you need to cancel or reschedule. Thank you.
+      </p>
+      <div style="margin-top:2.5rem;padding-top:2rem;border-top:1px solid var(--border);">
+        <div class="hour-label" style="margin-bottom:0.8rem;">Available days</div>
+        <div style="display:grid;gap:0.5rem;font-size:0.85rem;">
+          <div style="display:flex;justify-content:space-between;max-width:260px;"><span>Monday</span><span style="color:var(--black);font-weight:500;">08:00 – 19:00</span></div>
+          <div style="display:flex;justify-content:space-between;max-width:260px;color:var(--tan);"><span>Tuesday</span><span>Closed</span></div>
+          <div style="display:flex;justify-content:space-between;max-width:260px;color:var(--tan);"><span>Wednesday</span><span>Closed</span></div>
+          <div style="display:flex;justify-content:space-between;max-width:260px;"><span>Thursday</span><span style="color:var(--black);font-weight:500;">08:00 – 19:00</span></div>
+          <div style="display:flex;justify-content:space-between;max-width:260px;"><span>Friday</span><span style="color:var(--black);font-weight:500;">08:00 – 19:00</span></div>
+          <div style="display:flex;justify-content:space-between;max-width:260px;"><span>Saturday</span><span style="color:var(--black);font-weight:500;">08:00 – 19:00</span></div>
+          <div style="display:flex;justify-content:space-between;max-width:260px;color:var(--tan);"><span>Sunday</span><span>Closed</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-box">
+      <form onsubmit="submitBooking(event)" novalidate>
+        <div class="form-grid">
+          <div class="form-group">
+            <label>First Name *</label>
+            <input type="text" id="bFirstName" placeholder="Maria" required>
+          </div>
+          <div class="form-group">
+            <label>Last Name *</label>
+            <input type="text" id="bLastName" placeholder="Borg" required>
+          </div>
+          <div class="form-group full">
+            <label>Phone Number *</label>
+            <input type="tel" id="bPhone" placeholder="+356 9999 9999" required>
+          </div>
+          <div class="form-group full">
+            <label>Email Address</label>
+            <input type="email" id="bEmail" placeholder="optional">
+          </div>
+          <div class="form-group full">
+            <label>Service *</label>
+            <div class="select-wrap">
+              <select id="bService" required>
+                <option value="">Select a service…</option>
+                <option>Hair Cut</option>
+                <option>Wash & Blow Dry</option>
+                <option>Hair Styling</option>
+                <option>Colour</option>
+                <option>Highlights</option>
+                <option>Treatment</option>
+                <option>Cut & Colour</option>
+                <option>Cut & Blow Dry</option>
+                <option>Other / Not Sure</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Preferred Date *</label>
+            <input type="date" id="bDate" required>
+          </div>
+          <div class="form-group">
+            <label>Preferred Time *</label>
+            <div class="select-wrap">
+              <select id="bTime" required>
+                <option value="">Select…</option>
+                <option>08:00</option>
+                <option>08:30</option>
+                <option>09:00</option>
+                <option>09:30</option>
+                <option>10:00</option>
+                <option>10:30</option>
+                <option>11:00</option>
+                <option>11:30</option>
+                <option>12:00</option>
+                <option>12:30</option>
+                <option>13:00</option>
+                <option>13:30</option>
+                <option>14:00</option>
+                <option>14:30</option>
+                <option>15:00</option>
+                <option>15:30</option>
+                <option>16:00</option>
+                <option>16:30</option>
+                <option>17:00</option>
+                <option>17:30</option>
+                <option>18:00</option>
+                <option>18:30</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group full">
+            <label>Notes</label>
+            <textarea id="bNotes" placeholder="Anything Joanne should know — hair type, allergies, special requests…"></textarea>
+          </div>
+        </div>
+        <button type="submit" class="form-submit" id="bookBtn">Request Appointment</button>
+        <div class="form-success" id="bookingSuccess">
+          <strong>Booking received!</strong>
+          Thank you. Joanne will be in touch to confirm your appointment shortly. If you need to reach her directly, call +36 21 525 260.
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div>
+    <span class="section-label">Find Us</span>
+    <h2 class="section-title">Get in touch</h2>
+    <p class="section-sub">Pop in, call, or book online. Joanne looks forward to seeing you.</p>
+    <div class="about-details" style="margin-top:2rem;">
+      <div class="about-detail">
+        <svg class="about-detail-icon" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><circle cx="12" cy="11" r="3"/></svg>
+        <div class="about-detail-text">
+          <strong>Address</strong>
+          44 Triq il-Parrocca, Mellieħa, Malta
+        </div>
+      </div>
+      <div class="about-detail">
+        <svg class="about-detail-icon" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 014.5 10.5a19.79 19.79 0 01-3.07-8.67A2 2 0 013.41 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L7.91 7.91a16 16 0 006.29 6.29l.76-.76a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+        <div class="about-detail-text">
+          <strong>Phone</strong>
+          +36 21 525 260
+        </div>
+      </div>
+    </div>
+    <div style="margin-top:2rem;">
+      <a href="tel:+3621525260" class="btn btn-primary" style="display:inline-block;text-decoration:none;">Call Joanne</a>
+    </div>
+  </div>
+  <div class="contact-map">
+    <div>
+      <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="var(--tan)" stroke-width="1.5"><path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><circle cx="12" cy="11" r="3"/></svg>
+      <p style="margin-top:0.8rem;font-family:'Playfair Display',serif;font-size:1rem;color:var(--black);">Mellieħa, Malta</p>
+      <p style="margin-top:0.3rem;font-size:0.8rem;">44 Triq il-Parrocca</p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2026 JoanneVille Hair Studio · Mellieħa, Malta</p>
+  <button class="footer-admin-link" onclick="openAdmin()">admin</button>
+</footer>
+
+<!-- ADMIN OVERLAY -->
+<div class="admin-overlay" id="adminOverlay" onclick="handleOverlayClick(event)">
+  <div class="admin-modal" id="adminModal">
+    <div class="admin-header">
+      <span class="admin-title">Joanne's Bookings</span>
+      <button class="admin-close" onclick="closeAdmin()">✕</button>
+    </div>
+
+    <!-- Login -->
+    <div class="admin-login" id="adminLogin">
+      <p>Enter the admin password to view bookings.</p>
+      <label>Password</label>
+      <input type="password" id="adminPwd" placeholder="••••••••" onkeydown="if(event.key==='Enter')checkLogin()">
+      <br>
+      <button class="admin-login-btn" onclick="checkLogin()">Sign In</button>
+      <p class="admin-error" id="loginError" style="display:none;">Incorrect password. Try again.</p>
+      <p style="margin-top:2rem;font-size:0.75rem;color:var(--tan);">Default password: <strong>joanne2026</strong><br>You can change this in the page code.</p>
+    </div>
+
+    <!-- Panel -->
+    <div class="admin-panel" id="adminPanel">
+      <div class="admin-stats" id="adminStats"></div>
+      <div class="admin-toolbar">
+        <select id="filterService" onchange="renderBookings()">
+          <option value="">All services</option>
+          <option>Hair Cut</option>
+          <option>Wash & Blow Dry</option>
+          <option>Hair Styling</option>
+          <option>Colour</option>
+          <option>Highlights</option>
+          <option>Treatment</option>
+          <option>Cut & Colour</option>
+          <option>Cut & Blow Dry</option>
+          <option>Other / Not Sure</option>
+        </select>
+        <input type="date" id="filterDate" onchange="renderBookings()" placeholder="Filter by date">
+        <button class="admin-clear-btn" onclick="clearAllBookings()">Clear All</button>
+      </div>
+      <div id="bookingsContainer"></div>
+      <button onclick="closeAdmin()" style="margin-top:1.5rem;padding:0.6rem 1.5rem;background:none;border:1px solid var(--border);font-size:0.78rem;letter-spacing:0.1em;text-transform:uppercase;cursor:pointer;font-family:'DM Sans',sans-serif;color:var(--muted);">Close</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  // ── ADMIN PASSWORD ── change this!
+  const ADMIN_PASSWORD = 'joanne2026';
+
+  // ── BOOKINGS STORAGE ──
+  function getBookings() {
+    try { return JSON.parse(localStorage.getItem('jv_bookings') || '[]'); }
+    catch { return []; }
+  }
+  function saveBookings(b) {
+    localStorage.setItem('jv_bookings', JSON.stringify(b));
+  }
+
+  // ── BOOKING FORM ──
+  document.getElementById('bDate').min = new Date().toISOString().split('T')[0];
+
+  function submitBooking(e) {
+    e.preventDefault();
+    const fn = document.getElementById('bFirstName').value.trim();
+    const ln = document.getElementById('bLastName').value.trim();
+    const ph = document.getElementById('bPhone').value.trim();
+    const sv = document.getElementById('bService').value;
+    const dt = document.getElementById('bDate').value;
+    const tm = document.getElementById('bTime').value;
+
+    if (!fn || !ln || !ph || !sv || !dt || !tm) {
+      alert('Please fill in all required fields (marked with *).');
+      return;
+    }
+
+    const booking = {
+      id: Date.now(),
+      firstName: fn,
+      lastName: ln,
+      phone: ph,
+      email: document.getElementById('bEmail').value.trim(),
+      service: sv,
+      date: dt,
+      time: tm,
+      notes: document.getElementById('bNotes').value.trim(),
+      bookedAt: new Date().toISOString(),
+      status: 'new'
+    };
+
+    const bookings = getBookings();
+    bookings.push(booking);
+    saveBookings(bookings);
+
+    const btn = document.getElementById('bookBtn');
+    btn.style.display = 'none';
+    document.getElementById('bookingSuccess').style.display = 'block';
+  }
+
+  // ── ADMIN ──
+  function openAdmin() {
+    document.getElementById('adminOverlay').classList.add('open');
+    document.getElementById('adminPwd').value = '';
+    document.getElementById('loginError').style.display = 'none';
+  }
+  function closeAdmin() {
+    document.getElementById('adminOverlay').classList.remove('open');
+  }
+  function handleOverlayClick(e) {
+    if (e.target === document.getElementById('adminOverlay')) closeAdmin();
+  }
+
+  function checkLogin() {
+    const pwd = document.getElementById('adminPwd').value;
+    if (pwd === ADMIN_PASSWORD) {
+      document.getElementById('adminLogin').style.display = 'none';
+      document.getElementById('adminPanel').classList.add('visible');
+      renderBookings();
+    } else {
+      document.getElementById('loginError').style.display = 'block';
+    }
+  }
+
+  function renderBookings() {
+    const allBookings = getBookings();
+    const filterSvc = document.getElementById('filterService').value;
+    const filterDate = document.getElementById('filterDate').value;
+
+    let filtered = allBookings.filter(b => {
+      if (filterSvc && b.service !== filterSvc) return false;
+      if (filterDate && b.date !== filterDate) return false;
+      return true;
+    });
+
+    // Sort by date then time
+    filtered.sort((a, b) => {
+      if (a.date !== b.date) return a.date.localeCompare(b.date);
+      return a.time.localeCompare(b.time);
+    });
+
+    // Stats
+    const today = new Date().toISOString().split('T')[0];
+    const upcoming = allBookings.filter(b => b.date >= today).length;
+    const newCount = allBookings.filter(b => b.status === 'new').length;
+    document.getElementById('adminStats').innerHTML = `
+      <div class="stat-box"><div class="stat-num">${allBookings.length}</div><div class="stat-label">Total Bookings</div></div>
+      <div class="stat-box"><div class="stat-num">${upcoming}</div><div class="stat-label">Upcoming</div></div>
+      <div class="stat-box"><div class="stat-num">${newCount}</div><div class="stat-label">New / Unread</div></div>
+    `;
+
+    const container = document.getElementById('bookingsContainer');
+    if (filtered.length === 0) {
+      container.innerHTML = '<div class="no-bookings">No bookings found.</div>';
+      return;
+    }
+
+    const rows = filtered.map(b => {
+      const dateStr = b.date ? new Date(b.date + 'T12:00:00').toLocaleDateString('en-GB', { weekday: 'short', day: 'numeric', month: 'short', year: 'numeric' }) : '—';
+      const bookedStr = b.bookedAt ? new Date(b.bookedAt).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' }) : '—';
+      const badge = b.status === 'done'
+        ? '<span class="badge badge-done">Done</span>'
+        : '<span class="badge badge-new">New</span>';
+      const markBtn = b.status !== 'done'
+        ? `<button class="mark-done-btn" onclick="markDone(${b.id})">Mark done</button>`
+        : '';
+      return `<tr>
+        <td><strong>${b.firstName} ${b.lastName}</strong><br><span style="font-size:0.78rem;color:var(--muted)">${b.phone}</span>${b.email ? '<br><span style="font-size:0.75rem;color:var(--muted)">'+b.email+'</span>' : ''}</td>
+        <td>${b.service}</td>
+        <td>${dateStr}<br><strong>${b.time}</strong></td>
+        <td>${b.notes || '<span style="color:var(--tan)">—</span>'}</td>
+        <td>${badge}<br>${markBtn}</td>
+        <td style="font-size:0.75rem;color:var(--tan)">${bookedStr}</td>
+      </tr>`;
+    }).join('');
+
+    container.innerHTML = `
+      <table class="bookings-table">
+        <thead><tr>
+          <th>Client</th><th>Service</th><th>Date & Time</th><th>Notes</th><th>Status</th><th>Booked</th>
+        </tr></thead>
+        <tbody>${rows}</tbody>
+      </table>`;
+  }
+
+  function markDone(id) {
+    const bookings = getBookings();
+    const b = bookings.find(x => x.id === id);
+    if (b) { b.status = 'done'; saveBookings(bookings); renderBookings(); }
+  }
+
+  function clearAllBookings() {
+    if (confirm('Delete ALL bookings? This cannot be undone.')) {
+      saveBookings([]);
+      renderBookings();
+    }
+  }
+
+  // ── MOBILE NAV ──
+  function openMobileNav() { document.getElementById('mobileNav').classList.add('open'); }
+  function closeMobileNav() { document.getElementById('mobileNav').classList.remove('open'); }
+</script>
+</body>
+</html>
